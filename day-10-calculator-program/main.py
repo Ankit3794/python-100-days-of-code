@@ -5,21 +5,18 @@ opeations = {
     '+': add,
     '-': subtract,
     '*': multiply,
-    '\\' : divide 
+    '/' : divide 
 }
-
 def calculator():
     n1 = int(input("What's the first number?: "))
     
     should_continue = True
-    
-    # Print operations on console
-    for op in opeations:
-        print(op)
-
-    operation = input('Pick an operation: ')
 
     while should_continue:
+        # Print operations on console
+        for op in opeations:
+            print(op)
+        operation = input('Pick an operation: ')
         n2 = int(input("What's the next number?: "))
 
         perform = opeations.get(operation)
