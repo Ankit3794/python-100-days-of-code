@@ -1,6 +1,7 @@
 import requests
 import datetime as dt
 import time
+import pytz as pt
 
 MY_LOCATION = {
     "lat": -4.022505,
@@ -22,6 +23,8 @@ def get_sunrise_sunset_time():
     data = response.json()
     sunrise_dt = dt.datetime.fromisoformat(data["results"]["sunrise"])
     sunset_dt = dt.datetime.fromisoformat(data["results"]["sunset"])
+    sunrise_dt = sunrise_dt.astimezone(pt.timezone('Asia/Kolkata'))
+    sunset_dt = sunset_dt.astimezone(pt.timezone('Asia/Kolkata'))
     return sunrise_dt.time(), sunset_dt.time()
 
 
@@ -53,8 +56,8 @@ def check_is_at_night():
     :return:
     """
     sunrise_time, sunset_time = get_sunrise_sunset_time()
-    utc_time = dt.datetime.utcnow().time()
-    return sunset_time < utc_time
+    current_time = dt.datetime.now()
+    return sunset_time < current_time
 
 
 if __name__ == "__main__":
