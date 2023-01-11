@@ -1,0 +1,6 @@
+flask~=2.2.2
+flask-restful
+flask-jwt-extended
+flask-sqlalchemy
+SQLAlchemy
+psycopg2-binary
