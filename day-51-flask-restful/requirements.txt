@@ -4,3 +4,4 @@ flask-jwt-extended
 flask-sqlalchemy
 SQLAlchemy
 psycopg2-binary
+pytest

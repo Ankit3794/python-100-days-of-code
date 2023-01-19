@@ -4,9 +4,10 @@ from db import db
 
 class UserModel(db.Model):
     __tablename__ = "user"
-    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, primary_key=True)
     username = Column(String(20), unique=True)
     password = Column(String(12), nullable=False)
+    # todos = db.relationship(ToDoModel, backref="user", cascade="all, delete, delete-orphan")
 
     def __init__(self, username, password):
         self.username = username

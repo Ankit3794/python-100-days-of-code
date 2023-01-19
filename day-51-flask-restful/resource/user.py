@@ -7,8 +7,8 @@ post_put_req_parser.add_argument("username", required=True, help="username is ma
 post_put_req_parser.add_argument("password", required=True, help="password is mandatory")
 
 user_fields = {
-    "username": fields.String,
-    "password": fields.String
+    "user_id": fields.Integer,
+    "username": fields.String
 }
 
 
@@ -62,7 +62,9 @@ class Login(Resource):
     def post(self):
         args = post_put_req_parser.parse_args()
         user = UserModel.get_user_by_username(args["username"])
+        if not user:
+            return abort(401, message="user doesn't exist")
         if user.password != args["password"]:
             return abort(401, message="credentials didn't match")
-        access_token = create_access_token(identity=user.username)
+        access_token = create_access_token(identity=user.user_id)
         return {"message": "login successfully", "auth": access_token}
